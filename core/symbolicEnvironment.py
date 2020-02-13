@@ -381,7 +381,7 @@ MINE = Predicate("mine", 2)
 EMPTY = Predicate("empty", 2)
 OPPONENT = Predicate("opponent", 2)
 class TicTacTeo(SymbolicEnvironment):
-    all_variations = ("")
+    all_variations = ("n")
     def __init__(self, width=3, know_valid_pos=True):
         actions = [PLACE]
         self.language = LanguageFrame(actions, extensional=[ZERO, MINE, EMPTY, OPPONENT, SUCC],
@@ -467,3 +467,7 @@ class TicTacTeo(SymbolicEnvironment):
             return 0, True
         return 0, False
 
+    def vary(self,type):
+        if type == "n":
+            width = 3#np.zeros([3,3])
+        return TicTacTeo(width)
