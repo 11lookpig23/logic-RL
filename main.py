@@ -40,7 +40,7 @@ def generalized_test(task, name, algo):
                               "distribution":result["distribution"]}
     for k,v in summary.items():
         print(k+": "+str(v["mean"])+"+-"+str(v["std"]))
-    with open("model/"+name+"/result.json", "wr") as f:
+    with open("model/"+name+"/result.json", "w") as f:
         json.dump(summary, f)
 
 def start_Random(task, name, mode, variation=None):
@@ -134,7 +134,7 @@ def start_DILP(task, name, mode, variation=None):
             critic = NeuralCritic([20], env.state_dim, 1.0, learning_rate=0.001,
                                     state2vector=env.state2vector, involve_steps=True)
         learner = ReinforceLearner(agent, env, 0.05, critic=critic,
-                                    batched=True, steps=1300, name=name)
+                                    batched=True, steps=100, name=name)
 
     elif task == "stack":
         man, env = setup_stack(variation)

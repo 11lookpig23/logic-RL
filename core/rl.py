@@ -2,7 +2,7 @@ from core.induction import *
 from copy import deepcopy
 from collections import namedtuple
 import pickle
-
+import json
 
 def totuple(a):
     try:
@@ -38,7 +38,7 @@ class ReinforceLearner(object):
         self.end_by_episode=end_by_episode
         self.batch_size = minibatch_size
         self.optimizer = optimizer
-        self.log_steps = 100
+        self.log_steps = 10
 
     def _construct_train(self, learning_rate):
         self.tf_returns = tf.placeholder(shape=[None], dtype=tf.float32)
@@ -231,7 +231,7 @@ class ReinforceLearner(object):
             # model definition code goes here
             # and in it call
 
-    def evaluate(self, repeat=100):
+    def evaluate(self, repeat=10):
         results = []
         with tf.Session() as sess:
             self.setup_train(sess)
@@ -309,6 +309,7 @@ class ReinforceLearner(object):
 
     def train(self):
         with tf.Session() as sess:
+            evalRes = {}
             self.setup_train(sess)
             self.minibatch_buffer = self.get_minibatch_buffer(sess, batch_size=self.batch_size,
                                                               end_by_episode=self.end_by_episode)
@@ -316,6 +317,23 @@ class ReinforceLearner(object):
                 log = self.train_step(sess)
                 print("-"*20)
                 print("step "+str(i)+"return is "+str(log["return"]))
+                if i%(self.log_steps*2)==0:
+                    result = self.evaluate()
+                    dis = {}
+                    evalRes[str(i)] = {"mean":round(result["mean"], 3), "std": round(result["std"], 3),
+                              "distribution": result['distribution'] }
+                    for key in  evalRes[str(i)].keys():#result['distribution'].keys():
+                        dis[str(key)] =  str(evalRes[str(i)][key])
+                    evalRes[str(i)] = dis
+                    #with open('submit.json') as f:
+                    #    data = json.load(f)
+                    #evalRes.update(data)
+                    try:
+                        with open('submit.json','w') as f:
+                            json.dump(evalRes,f)
+                    except:
+                        print("jsonerror")
+                    print("single-eval---  ",evalRes[str(i)])
                 if i%self.log_steps==0:
                     self.agent.log(sess)
                     if self.name:
@@ -323,6 +341,7 @@ class ReinforceLearner(object):
                         self.save(sess, path)
                     pprint(log)
                 print("-"*20+"\n")
+            print("all_eval--- ",evalRes)
         return log["return"]
 
 class PPOLearner(ReinforceLearner):
