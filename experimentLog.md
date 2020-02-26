@@ -33,4 +33,6 @@ There is no connection among invented predicates, thus no interpretable predicat
    '1.0: invented3(X):-mine(Y,X),mine(Y,X)'
    
    '1.0: invented4(X):-opponent(X,Y),mine(Z,Z)'
+
+   '0.9999999: place(X,Y):-empty(X,Z),invented2(X,Y)'
    ```
