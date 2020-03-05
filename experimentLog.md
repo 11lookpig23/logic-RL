@@ -39,14 +39,15 @@ There is no connection among invented predicates, thus no interpretable predicat
    
 ## Result3 
 - Different initial value
-  ``` x - o
-      - - -
-      o - x
+  ``` 
+  x - o
+  - - -
+  o - x
   ```
 - Steps: 1600
 - Value Distribution: {1:100}
 - Some Predicates:
-  ```
+ ```
    Predicate(name='invented', arity=2)
   '0.183: invented(X,Y):-invented4(X),invented4(Y)'
   '0.229: invented(X,Y):-invented4(X),empty(Y,Y)'
