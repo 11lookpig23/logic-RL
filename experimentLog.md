@@ -39,58 +39,90 @@ There is no connection among invented predicates, thus no interpretable predicat
    
 ## Result3 
 - Different initial value
-  ```
-x - o
-- - -
-o - x
+  ``` 
+  x - o
+  - - -
+  o - x
   ```
 - Steps: 1600
 - Value Distribution: {1:100}
 - Some Predicates:
+ ```
+   Predicate(name='invented', arity=2)
+  '0.183: invented(X,Y):-invented4(X),invented4(Y)'
+  '0.229: invented(X,Y):-invented4(X),empty(Y,Y)'
+  '0.43: invented(X,Y):-invented4(Y),empty(X,X)'
 
-```
-Predicate(name='invented', arity=2)
-'0.183: invented(X,Y):-invented4(X),invented4(Y)'
-'0.229: invented(X,Y):-invented4(X),empty(Y,Y)'
-'0.43: invented(X,Y):-invented4(Y),empty(X,X)'
+  Predicate(name='invented2', arity=2)
+  '0.623: invented2(X,Y):-invented(X,X),empty(Y,Y)'
 
-Predicate(name='invented2', arity=2)
-'0.623: invented2(X,Y):-invented(X,X),empty(Y,Y)'
+  Predicate(name='invented3', arity=1)
+  '0.14: invented3(X):-invented4(X),invented4(X)'
+  '0.126: invented3(X):-invented4(X),mine(Y,Y)'
+  '0.139: invented3(X):-empty(X,X),empty(Y,X)'
 
-Predicate(name='invented3', arity=1)
-'0.14: invented3(X):-invented4(X),invented4(X)'
-'0.126: invented3(X):-invented4(X),mine(Y,Y)'
-'0.139: invented3(X):-empty(X,X),empty(Y,X)'
- 
-Predicate(name='invented4', arity=1)
-'0.129: invented4(X):-empty(X,X),empty(Y,Z)'
-'0.622: invented4(X):-empty(X,X),succ(X,Y)'
+  Predicate(name='invented4', arity=1)
+  '0.129: invented4(X):-empty(X,X),empty(Y,Z)'
+  '0.622: invented4(X):-empty(X,X),succ(X,Y)'
 
-'0.208: place(X,Y):-invented4(X),invented4(Y)'
-```
+  '0.208: place(X,Y):-invented4(X),invented4(Y)'
+ ```
+### Discuss for Result3
+In4:   '0.622: invented4(X):-empty(X,X),succ(X,Y)': X < Y and X is on diagonal line and (X,X) is empty
+Place: X  <= In4(X) <=  (X = 1 or 2; But X = 1 is mined, thus X=2 )
+       Y  <= In4(X) <=  (Y = 1 or 2; But Y = 1 is mined, thus Y=2 )
+
 
 ## Result4
--  Steps: 1600
+-  Steps: 10000 [again]
 - Value Distribution: {-1: 25, 0: 12, 1: 63}
 - Some Predicates:
-```
-Predicate(name='invented', arity=2)
-'0.858: invented(X,Y):-empty(X,Y),empty(X,Z)'
-'0.119: invented(X,Y):-empty(X,Y),empty(Z,Y)'
+   ```
+     Predicate(name='invented', arity=2)
+     '0.858: invented(X,Y):-empty(X,Y),empty(X,Z)'
+     '0.119: invented(X,Y):-empty(X,Y),empty(Z,Y)'
 
-Predicate(name='invented2', arity=2)
-'0.307: invented2(X,Y):-zero(Z),empty(X,Y)'
-'0.418: invented2(X,Y):-empty(X,Y),empty(X,Y)'
-'0.121: invented2(X,Y):-empty(X,Y),empty(X,Z)'
-'0.155: invented2(X,Y):-empty(X,Y),empty(Z,Y)'
+     Predicate(name='invented2', arity=2)
+     '0.307: invented2(X,Y):-zero(Z),empty(X,Y)'
+     '0.418: invented2(X,Y):-empty(X,Y),empty(X,Y)'
+     '0.121: invented2(X,Y):-empty(X,Y),empty(X,Z)'
+     '0.155: invented2(X,Y):-empty(X,Y),empty(Z,Y)'
 
-Predicate(name='invented3', arity=1)
+     Predicate(name='invented3', arity=1)
 
-Predicate(name='invented4', arity=1)
-'0.929: invented4(X):-empty(Y,X),empty(Y,X)'
+     Predicate(name='invented4', arity=1)
+     '0.929: invented4(X):-empty(Y,X),empty(Y,X)'
 
-Predicate(name='place', arity=2)
-'0.186: place(X,Y):-invented2(X,Z),empty(X,Y)'
-'0.166: place(X,Y):-zero(Z),empty(X,Y)'
-'0.458: place(X,Y):-empty(X,Y),empty(X,Y)'
-```
+     Predicate(name='place', arity=2)
+     '0.186: place(X,Y):-invented2(X,Z),empty(X,Y)'
+     '0.166: place(X,Y):-zero(Z),empty(X,Y)'
+     '0.458: place(X,Y):-empty(X,Y),empty(X,Y)'
+   ```
+
+## Result5
+-  Steps: 3000
+-  Value Distribution:  {-1: 15, 1: 85}
+-  Some Predicates:
+      ```
+      Predicate(name='place', arity=2)
+      '0.997: place(X,Y):-empty(X,Y),mine(Z,Y)'
+       
+
+      Predicate(name='invented', arity=2)
+      '0.85: invented(X,Y):-succ(X,X),succ(X,Y)'
+      '0.107: invented(X,Y):-succ(X,X),mine(Y,Z)'
+       
+
+      Predicate(name='invented2', arity=2)
+      '0.396: invented2(X,Y):-succ(X,X),succ(X,Y)'
+      '0.224: invented2(X,Y):-succ(X,X),mine(Y,Z)'
+      '0.205: invented2(X,Y):-succ(X,X),opponent(Y,Z)'
+      '0.11: invented2(X,Y):-opponent(X,Y),invented3(X)'
+       
+      Predicate(name='invented3', arity=1)
+      '0.236: invented3(X):-succ(X,X),succ(X,X)'
+      '0.754: invented3(X):-succ(X,X),empty(X,Y)'
+       
+      Predicate(name='invented4', arity=1)
+      '0.822: invented4(X):-empty(X,X),succ(X,Y)'
+      ```
