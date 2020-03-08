@@ -101,6 +101,12 @@ Place: X  <= In4(X) <=  (X = 1 or 2; But X = 1 is mined, thus X=2 )
    ```
 
 ## Result5
+-  Different initial value:
+   ```
+   - o -
+   - - - 
+   x - x
+   ```
 -  Steps: 3000
 -  Value Distribution:  {-1: 15, 1: 85}
 -  Some Predicates:
