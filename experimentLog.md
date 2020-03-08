@@ -52,6 +52,7 @@ There is no connection among invented predicates, thus no interpretable predicat
   '0.183: invented(X,Y):-invented4(X),invented4(Y)'
   '0.229: invented(X,Y):-invented4(X),empty(Y,Y)'
   '0.43: invented(X,Y):-invented4(Y),empty(X,X)'
+<<<<<<< HEAD
 
   Predicate(name='invented2', arity=2)
   '0.623: invented2(X,Y):-invented(X,X),empty(Y,Y)'
@@ -72,6 +73,23 @@ In4:   '0.622: invented4(X):-empty(X,X),succ(X,Y)': X < Y and X is on diagonal l
 Place: X  <= In4(X) <=  (X = 1 or 2; But X = 1 is mined, thus X=2 )
        Y  <= In4(X) <=  (Y = 1 or 2; But Y = 1 is mined, thus Y=2 )
 
+=======
+
+  Predicate(name='invented2', arity=2)
+  '0.623: invented2(X,Y):-invented(X,X),empty(Y,Y)'
+
+  Predicate(name='invented3', arity=1)
+  '0.14: invented3(X):-invented4(X),invented4(X)'
+  '0.126: invented3(X):-invented4(X),mine(Y,Y)'
+  '0.139: invented3(X):-empty(X,X),empty(Y,X)'
+
+  Predicate(name='invented4', arity=1)
+  '0.129: invented4(X):-empty(X,X),empty(Y,Z)'
+  '0.622: invented4(X):-empty(X,X),succ(X,Y)'
+
+  '0.208: place(X,Y):-invented4(X),invented4(Y)'
+ ```
+>>>>>>> 91251e843585a2622872b2f62667ec4f2ef011fa
 
 ## Result4
 -  Steps: 10000 [again]
@@ -98,6 +116,7 @@ Place: X  <= In4(X) <=  (X = 1 or 2; But X = 1 is mined, thus X=2 )
      '0.166: place(X,Y):-zero(Z),empty(X,Y)'
      '0.458: place(X,Y):-empty(X,Y),empty(X,Y)'
    ```
+<<<<<<< HEAD
 
 ## Result5
 -  Steps: 3000
@@ -126,3 +145,5 @@ Place: X  <= In4(X) <=  (X = 1 or 2; But X = 1 is mined, thus X=2 )
       Predicate(name='invented4', arity=1)
       '0.822: invented4(X):-empty(X,X),succ(X,Y)'
       ```
+=======
+>>>>>>> 91251e843585a2622872b2f62667ec4f2ef011fa
