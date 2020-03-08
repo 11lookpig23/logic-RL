@@ -117,7 +117,7 @@ Place: X  <= In4(X) <=  (X = 1 or 2; But X = 1 is mined, thus X=2 )
 -  Steps: 3000
 -  Value Distribution:  {-1: 15, 1: 85}
 -  Some Predicates:
-      ```
+  ```
       Predicate(name='place', arity=2)
       '0.997: place(X,Y):-empty(X,Y),mine(Z,Y)'
        
@@ -139,4 +139,4 @@ Place: X  <= In4(X) <=  (X = 1 or 2; But X = 1 is mined, thus X=2 )
        
       Predicate(name='invented4', arity=1)
       '0.822: invented4(X):-empty(X,X),succ(X,Y)'
-      ```
+  ```
